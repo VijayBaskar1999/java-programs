@@ -7,7 +7,7 @@ public class TestStore {
 
     public static void main(String[] args) throws NegativeUnitsonhand {
         Scanner input = new Scanner(System.in);
-        int pur;
+        int pur=0;
         boolean flag=true;
         System.out.println("Enter No of retail items:");
         int n = input.nextInt();
@@ -47,16 +47,18 @@ public class TestStore {
             if(ch==1) {
                 CashRegister[] purobj = new CashRegister[n];
                 for (int i = 0; i < n; i++) {
-                    System.out.println("Enter number of " + obj[i].getDescription() + " to purchase:");
-                    boolean purunits;
+                    boolean purunits = false;
                     do{
-                        pur = input.nextInt();
-                        if(pur>obj[i].unitsonhand){
-                            throw new NegativeUnitsonhand("No Stock Available! only "+obj[i].unitsonhand+" Stocks are available");
+                        try {
+                            System.out.println("Enter number of " + obj[i].getDescription() + " to purchase:");
+                            pur = input.nextInt();
+                            if (pur > obj[i].unitsonhand) {
+                                throw new NegativeUnitsonhand("No Stock Available! only " + obj[i].unitsonhand + " Stocks are available\nplease enter purchase items under the limit:");
+                            } else
+                               purunits = true;
+                        }catch (NegativeUnitsonhand e){
+                            System.out.println(e);
                         }
-                        else
-                            purunits=true;
-
                     }while(!purunits);
                     obj[i].unitsonhand -= pur;
                     purobj[i] = new CashRegister(obj[i], pur);
