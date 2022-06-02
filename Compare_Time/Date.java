@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Date implements Compare{
     int day,month,year;
-
     public Date(int d,int m,int y){
         setDate(d);
         setMonth(m);
